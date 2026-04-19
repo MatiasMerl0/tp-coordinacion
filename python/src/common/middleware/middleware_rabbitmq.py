@@ -31,6 +31,7 @@ class _RabbitMQBase:
                 pika.ConnectionParameters(host=host)
             )
             self._channel = self._connection.channel()
+            self._channel.basic_qos(prefetch_count=1)
         except Exception as e:
             _raise_middleware_error(e)
 
